@@ -3,61 +3,246 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Film Editing: Types of Cuts</title>
+    <title>Essential Film Editing Techniques</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .cut-card { transition: transform 0.2s; }
-        .cut-card:hover { transform: scale(1.03); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8f7f4; /* Paper White */
+        }
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+            border: 1px solid #e5e7eb;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.07), 0 4px 6px -2px rgba(0, 0, 0, 0.04);
+        }
+        #modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .diagram-container {
+            background-color: #f3f4f6;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            min-height: 120px;
+        }
+        .timeline {
+            position: relative;
+            width: 100%;
+            height: 40px;
+        }
+        .track {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 15px;
+            border-radius: 4px;
+        }
+        .video-track { top: 0; }
+        .audio-track { bottom: 0; }
+        .clip {
+            position: absolute;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.1);
+        }
+        /* Custom diagram styles */
+        .diagram-box {
+            position: relative;
+            width: 100%;
+            height: 80px;
+            background-color: #d1d5db;
+            border: 2px solid #9ca3af;
+            overflow: hidden;
+        }
+        .diagram-box.split {
+            display: flex;
+        }
+        .diagram-box.split .half {
+            width: 50%;
+            height: 100%;
+        }
+        .diagram-box.split .cut-line {
+            width: 2px;
+            background-color: black;
+            height: 100%;
+            position: relative;
+        }
+        .diagram-box.split .cut-line.jagged {
+            background: repeating-linear-gradient(45deg, transparent, transparent 5px, black 5px, black 10px);
+        }
+        .diagram-box.split .cut-line.smooth {
+            width: 10px;
+            background: linear-gradient(to right, transparent, rgba(0,0,0,0.5), transparent);
+        }
     </style>
+    <!-- Chosen Palette: Paper White & Ink -->
+    <!-- Application Structure Plan: The application uses a responsive grid of interactive cards. Each card represents a specific editing technique. Clicking a card opens a modal window with a detailed explanation and a simple, animated diagram visualizing the concept. This structure was chosen to provide a quick, scannable overview while allowing users to explore topics in any order, making it an effective tool for both learning and reference. -->
+    <!-- Visualization & Content Choices: Report Info: 12+ editing cuts and their classifications. Goal: To create an interactive educational guide. Viz/Presentation: Cards for overview, modals for detail. Each modal contains a custom-animated diagram (built with HTML/CSS) to illustrate the cut (e.g., showing audio/video track relationships for J/L cuts). Interaction: Click-to-reveal modals with animated diagrams. Justification: The interactive and visual nature of the diagrams makes abstract editing concepts much easier to grasp than static text or images. Library/Method: Vanilla JS for all logic. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-4 sm:p-6 md:p-10">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900">Common Types of Film Cuts</h1>
-            <p class="mt-2 text-lg text-gray-600">A simple guide to help you understand the language of editing</p>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl font-bold text-gray-900">Film Editing Techniques</h1>
+            <p class="mt-3 text-lg text-gray-600 max-w-3xl mx-auto">An interactive guide to the essential transitions that shape visual storytelling. Click a card to learn more about each technique.</p>
         </header>
-        <main>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Straight Cut</h2>
-                    <p class="text-gray-700 text-center text-sm">The most basic cut—a direct transition from one shot to the next. Used everywhere for clarity and pace.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Jump Cut</h2>
-                    <p class="text-gray-700 text-center text-sm">A sudden, noticeable transition. Often used to show time passing or to create a jarring, energetic effect.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Match Cut</h2>
-                    <p class="text-gray-700 text-center text-sm">A cut between two visually similar shots. Used for clever transitions and to draw connections between scenes.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Cutaway</h2>
-                    <p class="text-gray-700 text-center text-sm">A cut to something other than the main action, then back. Useful for context, reactions, or hiding edits.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Cross-Cut / Parallel Editing</h2>
-                    <p class="text-gray-700 text-center text-sm">Alternates between two or more scenes happening at the same time. Builds tension or shows connections.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">L-Cut & J-Cut</h2>
-                    <p class="text-gray-700 text-center text-sm"><b>L-Cut:</b> Audio from scene A continues over the start of scene B.<br><b>J-Cut:</b> Audio from scene B begins before you see it. Both make edits feel smooth and natural.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Smash Cut</h2>
-                    <p class="text-gray-700 text-center text-sm">A sudden, dramatic cut—often from something calm to intense (or vice versa). Used for surprise or humor.</p>
-                </div>
-                <div class="cut-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-2">Montage</h2>
-                    <p class="text-gray-700 text-center text-sm">A series of quick shots edited together, often set to music, to show the passage of time or development of a story.</p>
-                </div>
-            </div>
-            <section class="mt-10 text-center">
-                <h2 class="text-2xl font-bold mb-3">Why do editors choose different cuts?</h2>
-                <p class="text-gray-700 mb-2">Each cut has its own rhythm and emotional effect. The best editors pick the right cut for the story moment!</p>
-            </section>
+
+        <main id="cuts-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Cards are dynamically generated by JavaScript -->
         </main>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-60 flex items-center justify-center p-4 hidden z-50">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+            <div class="p-6 sm:p-8">
+                <div class="flex justify-between items-start">
+                    <h2 id="modal-title" class="text-2xl font-bold text-gray-900"></h2>
+                    <button id="modal-close" class="text-3xl font-light leading-none text-gray-400 hover:text-gray-600">&times;</button>
+                </div>
+                <div id="modal-body" class="mt-4 text-gray-700 leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const cutsData = [
+                { id: 'standard', title: 'Standard Cut', description: 'A direct change from one shot to another without any effects. It provides a clean change in perspective without drawing attention to the edit itself.' },
+                { id: 'hard', title: 'Hard Cut', description: 'An intentional, abrupt change meant to be noticed. It creates a jarring effect, often used for comedic timing or to emphasize a sudden tonal shift.' },
+                { id: 'action', title: 'Cutting on Action', description: 'A cut made while a subject is in motion. The continuous movement across the edit makes the transition feel seamless and invisible to the viewer.' },
+                { id: 'j-cut', title: 'J-Cut', description: 'The audio from the next scene begins *before* we visually cut to it. This technique prepares the audience for the next scene and creates a smooth, natural transition.' },
+                { id: 'l-cut', title: 'L-Cut', description: 'The video changes to the next scene, but the audio from the previous scene continues briefly. This is often used to show a character\'s reaction while still hearing the speaker.' },
+                { id: 'cross', title: 'Cross Cutting', description: 'Cutting back and forth between two or more scenes happening simultaneously in different locations. It builds tension and creates connections between events.' },
+                { id: 'match', title: 'Match Cut', description: 'A transition where two shots are linked by a visual or thematic similarity (e.g., shape, action). It creates a meaningful, often metaphorical, connection between scenes.' },
+                { id: 'invisible', title: 'Invisible Cut', description: 'A cut deliberately hidden by camera movement, an object, or a dip to black, creating the illusion of a single continuous shot.' },
+                { id: 'smash', title: 'Smash Cut', description: 'An abrupt, jarring transition between two drastically different scenes (e.g., loud to quiet). It creates shock, surprise, or dramatic contrast.' },
+                { id: 'jump', title: 'Jump Cut', description: 'A cut that skips forward in time within the same shot. It creates a jarring, discontinuous effect used to show time passing quickly or create a sense of unease.' },
+                { id: 'cut-in', title: 'Cut-In', description: 'A transition from a wider shot to a closer view of a detail within the same scene. It emphasizes an important element that might otherwise be missed.' },
+                { id: 'cutaway', title: 'Cutaway', description: 'A shot that temporarily moves away from the main subject to show something else related to the scene. It provides context or hides continuity errors.' },
+                { id: 'montage', title: 'Montage', description: 'A sequence of short shots edited together to condense space, time, or information, such as a training sequence or showing the passage of years.' },
+                { id: 'comparison', title: 'Quick Comparison', description: 'Understanding when to use a cut depends on its effect. Transitions can be categorized as smooth, neutral, or abrupt to guide your storytelling choices.' }
+            ];
+
+            const grid = document.getElementById('cuts-grid');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalClose = document.getElementById('modal-close');
+
+            const createDiagram = (cutId) => {
+                let diagramHtml = '<div class="diagram-container">';
+                switch (cutId) {
+                    case 'standard':
+                        diagramHtml += `<div class="diagram-box split"><div class="half bg-yellow-200"></div><div class="cut-line"></div><div class="half bg-green-200"></div></div><p class="text-center text-sm mt-2 text-gray-500">A clean, invisible cut</p>`;
+                        break;
+                    case 'hard':
+                        diagramHtml += `<div class="diagram-box split"><div class="half bg-purple-200"></div><div class="cut-line jagged"></div><div class="half bg-red-200"></div></div><p class="text-center text-sm mt-2 text-gray-500">A jarring, noticeable cut</p>`;
+                        break;
+                    case 'action':
+                        diagramHtml += `<div class="diagram-box split"><div class="half bg-blue-200 flex items-center justify-end pr-2"><div class="w-8 h-12 bg-blue-500 transform rotate-12"></div></div><div class="cut-line"></div><div class="half bg-blue-200 flex items-center justify-start pl-2"><div class="w-8 h-12 bg-blue-500 transform -rotate-12"></div></div></div><p class="text-center text-sm mt-2 text-gray-500">Movement continues across the cut</p>`;
+                        break;
+                    case 'j-cut':
+                        diagramHtml += `<div class="timeline"><div class="video-track track"><div class="clip bg-blue-300" style="left: 0%; width: 50%;"></div><div class="clip bg-red-300" style="left: 50%; width: 50%;"></div></div><div class="audio-track track"><div class="clip bg-blue-500" style="left: 0%; width: 50%;"></div><div class="clip bg-red-500" style="left: 40%; width: 60%;"></div></div></div><div class="text-center text-sm mt-2 text-gray-500">Audio from Clip 2 starts early</div>`;
+                        break;
+                    case 'l-cut':
+                        diagramHtml += `<div class="timeline"><div class="video-track track"><div class="clip bg-blue-300" style="left: 0%; width: 50%;"></div><div class="clip bg-red-300" style="left: 50%; width: 50%;"></div></div><div class="audio-track track"><div class="clip bg-blue-500" style="left: 0%; width: 60%;"></div><div class="clip bg-red-500" style="left: 50%; width: 50%;"></div></div></div><div class="text-center text-sm mt-2 text-gray-500">Audio from Clip 1 lingers</div>`;
+                        break;
+                    case 'cross':
+                         diagramHtml += `<div class="text-center"><p class="font-semibold">Scene A</p><div class="h-2 bg-blue-300 rounded w-full my-1"></div><p class="font-semibold">Scene B</p><div class="h-2 bg-red-300 rounded w-full my-1"></div><p class="text-sm mt-2 text-gray-500">Cutting between parallel actions</p></div>`;
+                        break;
+                    case 'match':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-center gap-4"><div class="w-12 h-12 rounded-full bg-blue-500"></div><div class="w-12 h-12 bg-red-500 transform rotate-45"></div></div><p class="text-center text-sm mt-2 text-gray-500">A visual link between two shots</p>`;
+                        break;
+                    case 'invisible':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-center"><div class="w-16 h-16 bg-gray-400"></div><div class="w-2 h-16 bg-white absolute z-10 left-1/2 -ml-1"></div><div class="w-4 h-16 bg-black"></div></div><p class="text-center text-sm mt-2 text-gray-500">A cut hidden by an object</p>`;
+                        break;
+                    case 'smash':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-center gap-4"><div class="text-3xl">💥</div><div class="w-20 h-10 bg-gray-200"></div></div><p class="text-center text-sm mt-2 text-gray-500">An abrupt shift from chaos to calm</p>`;
+                        break;
+                    case 'jump':
+                        diagramHtml += `<div class="diagram-box flex justify-between px-8 items-center"><div class="w-8 h-12 bg-green-500"></div><div class="w-8 h-12 bg-green-500"></div></div><p class="text-center text-sm mt-2 text-gray-500">A skip in time within one shot</p>`;
+                        break;
+                    case 'cut-in':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-center"><div class="w-32 h-20 bg-gray-300 border-2 border-gray-400 relative"><div class="w-16 h-10 border-2 border-red-500 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div></div></div><p class="text-center text-sm mt-2 text-gray-500">A zoom to a specific detail</p>`;
+                        break;
+                    case 'cutaway':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-between"><div class="w-24 h-16 bg-blue-300"></div><div class="w-16 h-10 bg-red-300"></div></div><p class="text-center text-sm mt-2 text-gray-500">Temporarily moving away from the main scene</p>`;
+                        break;
+                    case 'montage':
+                        diagramHtml += `<div class="diagram-box flex items-center justify-center flex-wrap gap-1"><div class="w-8 h-8 bg-orange-300"></div><div class="w-8 h-8 bg-yellow-300"></div><div class="w-8 h-8 bg-lime-300"></div><div class="w-8 h-8 bg-green-300"></div><div class="w-8 h-8 bg-teal-300"></div><div class="w-8 h-8 bg-cyan-300"></div></div><p class="text-center text-sm mt-2 text-gray-500">Condensing time with a series of shots</p>`;
+                        break;
+                    case 'comparison':
+                        diagramHtml += `<div class="space-y-4"><div class="text-left"><h4 class="font-semibold text-green-600">Smooth Transitions</h4><p class="text-sm">Goal: To maintain a seamless flow. Examples: Cutting on Action, J-Cut, L-Cut, Match Cut.</p></div><div class="text-left"><h4 class="font-semibold text-gray-600">Neutral Transitions</h4><p class="text-sm">Goal: Functional cuts that serve the story. Examples: Standard Cut, Cut-in, Cutaway, Montage.</p></div><div class="text-left"><h4 class="font-semibold text-red-600">Abrupt Transitions</h4><p class="text-sm">Goal: Deliberately jarring for impact. Examples: Hard Cut, Smash Cut, Jump Cut.</p></div></div>`;
+                        break;
+                    default:
+                        diagramHtml += `<div class="text-center text-gray-500">Visual representation for this cut.</div>`;
+                }
+                diagramHtml += '</div>';
+                return diagramHtml;
+            };
+
+            cutsData.forEach(cut => {
+                const card = document.createElement('button');
+                card.className = 'card bg-white rounded-lg p-6 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500';
+                card.dataset.cutId = cut.id;
+                card.innerHTML = `
+                    <h3 class="text-xl font-semibold text-gray-900">${cut.title}</h3>
+                    <p class="mt-2 text-sm text-gray-600">${cut.description.split('.')[0]}.</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            const openModal = (cutId) => {
+                const cut = cutsData.find(c => c.id === cutId);
+                if (!cut) return;
+
+                modalTitle.textContent = cut.title;
+                modalBody.innerHTML = `
+                    <p class="mb-6">${cut.description}</p>
+                    ${createDiagram(cut.id)}
+                `;
+                
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    modal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('opacity-100');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            };
+
+            grid.addEventListener('click', (e) => {
+                const card = e.target.closest('.card');
+                if (card) {
+                    openModal(card.dataset.cutId);
+                }
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
