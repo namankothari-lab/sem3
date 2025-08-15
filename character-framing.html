@@ -3,65 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Camera Framing Techniques</title>
+    <title>Essential Camera Framing Techniques</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .frame-card { transition: transform 0.2s; }
-        .frame-card:hover { transform: scale(1.03); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f5f5f4; /* A warm, light neutral */
+        }
+        .card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+        #modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .shot-diagram {
+            border: 2px solid #d1d5db;
+            background-color: #f9fafb;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        .figure {
+            background-color: #6b7280;
+            border-radius: 9999px;
+        }
+        .camera {
+            width: 2rem;
+            height: 1.5rem;
+            background-color: #374151;
+            position: relative;
+        }
+        .camera::before {
+            content: '';
+            position: absolute;
+            top: 0.5rem;
+            left: -0.75rem;
+            width: 0.75rem;
+            height: 0.5rem;
+            background-color: #374151;
+        }
     </style>
+    <!-- Chosen Palette: Cinematic Neutrals (Stone, Slate, Gray) -->
+    <!-- Application Structure Plan: A responsive grid of interactive cards, each representing a core camera framing technique. Clicking a card triggers a modal overlay, presenting detailed information for that specific shot. This structure provides a clean, high-level overview while allowing users to dive into details on demand. This is superior to a linear document for learning and reference as it encourages exploration and direct comparison. -->
+    <!-- Visualization & Content Choices: Report Info: 8 essential camera shots. Goal: Educate on framing techniques and their purpose. Viz/Presentation: Each shot type is a card. Detailed content appears in a modal. Simple, abstract diagrams made with HTML/CSS are used to visually represent the framing of each shot, aiding comprehension. Interaction: Click-to-reveal modals. Justification: This interactive card/modal approach breaks down the information into digestible, focused segments. The visual diagrams make abstract concepts tangible. Library/Method: Vanilla JS for all modal logic and dynamic content population. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-4 sm:p-6 md:p-10">
-        <header class="text-center mb-8">
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-10">
             <h1 class="text-4xl font-bold text-gray-900">Essential Camera Framing Techniques</h1>
-            <p class="mt-2 text-lg text-gray-600">A quick interactive guide for filmmakers & storytellers</p>
+            <p class="mt-2 text-lg text-gray-600 max-w-3xl mx-auto">A filmmaker's guide to visual storytelling. Click on a card below to explore each fundamental shot type and learn how it shapes the narrative.</p>
         </header>
-        <main>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/d/dc/Extreme_Closeup_Eye.jpg/320px-Extreme_Closeup_Eye.jpg" alt="Extreme Close-Up example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Extreme Close-Up (ECU)</h2>
-                    <p class="text-gray-700 text-center text-sm">Shows a detail (like an eye or hand). Used for intensity or to focus the viewer's attention on something critical.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/b/ba/Close_Up_CU.jpg/320px-Close_Up_CU.jpg" alt="Close-Up example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Close-Up (CU)</h2>
-                    <p class="text-gray-700 text-center text-sm">Frames subject’s face. Reveals emotion, used for reaction shots, or to highlight dialogue and drama.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/0a/Medium_Close_Up_MCU.jpg/320px-Medium_Close_Up_MCU.jpg" alt="Medium Close-Up example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Medium Close-Up (MCU)</h2>
-                    <p class="text-gray-700 text-center text-sm">Frames subject from chest up. Balances emotion and body language; common in interviews and dialogue scenes.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/66/Medium_Shot_MS.jpg/320px-Medium_Shot_MS.jpg" alt="Medium Shot example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Medium Shot (MS)</h2>
-                    <p class="text-gray-700 text-center text-sm">Frames subject from waist up. Shows body language and some environment. Most common shot in film and TV.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/Medium_Long_Shot_MLS.jpg/320px-Medium_Long_Shot_MLS.jpg" alt="Medium Long Shot example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Medium Long Shot (MLS)</h2>
-                    <p class="text-gray-700 text-center text-sm">Frames subject from knees up. Shows more of the setting, often used for group shots or movement.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Long_Shot_LS.jpg/320px-Long_Shot_LS.jpg" alt="Long Shot example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Long Shot (LS) / Wide Shot</h2>
-                    <p class="text-gray-700 text-center text-sm">Shows full body and environment. Used for action, establishing space, or showing relationships.</p>
-                </div>
-                <div class="frame-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2d/Extreme_Long_Shot_ELS.jpg/320px-Extreme_Long_Shot_ELS.jpg" alt="Extreme Long Shot example" class="mb-3 w-32 h-32 object-cover rounded">
-                    <h2 class="text-xl font-semibold mb-1">Extreme Long Shot (ELS)</h2>
-                    <p class="text-gray-700 text-center text-sm">Shows landscape or cityscape. Establishes setting, scale, or mood. Used at beginnings or transitions.</p>
-                </div>
-            </div>
-            <section class="mt-10 text-center">
-                <h2 class="text-2xl font-bold mb-3">How to choose the right framing?</h2>
-                <p class="text-gray-700 mb-2">Think about the emotion, information, and point of view you want to convey.</p>
-                <p class="text-gray-700">Try combining shots for dynamic, visually engaging storytelling!</p>
-            </section>
+
+        <main id="shot-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Cards will be injected by JavaScript -->
         </main>
     </div>
+
+    <!-- Modal Structure -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 hidden z-50">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-xl w-full max-w-2xl max-h-[90vh] overflow-y-auto transform scale-95">
+            <div class="p-6">
+                <div class="flex justify-between items-start">
+                    <h2 id="modal-title" class="text-2xl font-bold text-gray-900"></h2>
+                    <button id="modal-close" class="text-gray-400 hover:text-gray-600">&times;</button>
+                </div>
+                <div id="modal-body" class="mt-4 text-gray-700 leading-relaxed"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const shotData = [
+                {
+                    id: 'establishing',
+                    title: 'Establishing Shot',
+                    description: 'A wide or extreme wide shot that introduces the location. It provides context about geography, time of day, and atmosphere, allowing viewers to orient themselves.',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="figure" style="width: 1rem; height: 1.5rem;"></div><div class="text-xs text-gray-500">Wide View</div></div>`
+                },
+                {
+                    id: 'character',
+                    title: 'Character Framing',
+                    description: 'Shots focused on characters to convey emotion and dynamics. Includes <strong>Single Shots</strong> (one person), <strong>Two-Shots</strong> (two people, showing relationship), and <strong>Three-Shots</strong> (three people, showing group dynamics).',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="flex gap-2"><div class="figure" style="width: 1.5rem; height: 2.5rem;"></div><div class="figure" style="width: 1.5rem; height: 2.5rem;"></div></div><div class="text-xs text-gray-500">Two-Shot Example</div></div>`
+                },
+                {
+                    id: 'group',
+                    title: 'Group Shot',
+                    description: 'Frames four or more people. These shots show community or team dynamics and require careful blocking to create a visually interesting composition with depth.',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="flex gap-2 items-end"><div class="figure" style="width: 1rem; height: 2rem;"></div><div class="figure" style="width: 1rem; height: 2.5rem;"></div><div class="figure" style="width: 1rem; height: 2.25rem;"></div><div class="figure" style="width: 1rem; height: 2rem;"></div></div><div class="text-xs text-gray-500">Ensemble</div></div>`
+                },
+                {
+                    id: 'ots',
+                    title: 'Over-the-Shoulder (OTS)',
+                    description: 'The camera is positioned behind one character, showing their shoulder in the foreground while focusing on another. It creates intimacy and pulls the audience into the conversation.',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="absolute left-4 top-1/2 -translate-y-1/2 figure" style="width: 4rem; height: 6rem; background-color: #9ca3af;"></div><div class="figure" style="width: 2rem; height: 3rem;"></div><div class="text-xs text-gray-500 mt-2">Conversation View</div></div>`
+                },
+                {
+                    id: 'pov',
+                    title: 'Point of View (POV)',
+                    description: "Shows exactly what a character sees, as if the camera has replaced their eyes. This creates a deep sense of immersion and empathy.",
+                    diagram: `<div class="shot-diagram rounded-md"><div class="text-4xl">👁️</div><div class="text-xs text-gray-500">Through Their Eyes</div></div>`
+                },
+                {
+                    id: 'master',
+                    title: 'Master Shot',
+                    description: 'A single, continuous take of an entire scene from a wider angle. It serves as the backbone for editing, ensuring spatial continuity between closer shots.',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="flex gap-4"><div class="figure" style="width: 1rem; height: 1.5rem;"></div><div class="figure" style="width: 1rem; height: 1.5rem;"></div><div class="figure" style="width: 1rem; height: 1.5rem;"></div></div><div class="text-xs text-gray-500">Entire Scene</div></div>`
+                },
+                {
+                    id: 'detail',
+                    title: 'Detail Shots',
+                    description: 'Close-ups that add information. <strong>Insert Shots</strong> focus on a key object within the scene (e.g., a letter). <strong>Cutaway Shots</strong> show something related but separate from the main action (e.g., a ticking clock).',
+                    diagram: `<div class="shot-diagram rounded-md"><div class="w-12 h-8 bg-white border-2 border-gray-400 p-1 text-xs">✉️</div><div class="text-xs text-gray-500 mt-2">Insert Example</div></div>`
+                },
+                {
+                    id: 'reaction',
+                    title: 'Reaction Shot',
+                    description: "Captures a character's emotional response to an event. These are powerful narrative tools that reveal a character's true feelings and drive the emotional story.",
+                    diagram: `<div class="shot-diagram rounded-md"><div class="figure relative" style="width: 3rem; height: 4rem;"><div class="absolute top-1/3 left-1/2 -translate-x-1/2 text-white text-lg">😮</div></div><div class="text-xs text-gray-500 mt-2">Emotional Response</div></div>`
+                }
+            ];
+
+            const grid = document.getElementById('shot-grid');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalClose = document.getElementById('modal-close');
+
+            shotData.forEach(shot => {
+                const card = document.createElement('button');
+                card.className = 'card bg-white rounded-lg shadow-md p-6 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500';
+                card.dataset.shotId = shot.id;
+                card.innerHTML = `
+                    <h3 class="text-xl font-semibold text-gray-900">${shot.title}</h3>
+                    <p class="mt-2 text-sm text-gray-600">${shot.description.split('.')[0]}.</p>
+                `;
+                grid.appendChild(card);
+            });
+
+            const openModal = (shotId) => {
+                const shot = shotData.find(s => s.id === shotId);
+                if (!shot) return;
+
+                modalTitle.textContent = shot.title;
+                modalBody.innerHTML = `
+                    <div class="mb-4">${shot.diagram}</div>
+                    <p>${shot.description}</p>
+                `;
+                
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    modal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95');
+                    modalContent.classList.add('scale-100');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('opacity-100');
+                modalContent.classList.remove('scale-100');
+                modalContent.classList.add('scale-95');
+                document.body.style.overflow = '';
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                }, 300);
+            };
+
+            grid.addEventListener('click', (e) => {
+                const card = e.target.closest('.card');
+                if (card) {
+                    openModal(card.dataset.shotId);
+                }
+            });
+
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    closeModal();
+                }
+            });
+        });
+    </script>
 </body>
 </html>
