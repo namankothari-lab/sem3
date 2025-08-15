@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The 7-Act Story Structure</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .act-content {
+            display: none;
+        }
+        .act-content.active {
+            display: block;
+        }
+        .nav-button.active {
+            background-color: #4A5568;
+            color: #FFFFFF;
+        }
+    </style>
+</head>
+<body class="bg-gray-100 text-gray-800">
+    <div class="container mx-auto p-4 sm:p-6 md:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-gray-900">The 7-Act Story Structure</h1>
+            <p class="mt-2 text-lg text-gray-600">An interactive guide to crafting compelling narratives.</p>
+        </header>
+        <main>
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <h2 class="text-2xl font-semibold mb-4 text-center">Story Tension Arc</h2>
+                 <p class="text-center text-gray-600 mb-4">Click on an act in the timeline below to see its details and how it affects the story's tension.</p>
+                <div class="chart-container" style="position: relative; height:40vh; width:80vw; max-width:800px; margin: auto;">
+                    <canvas id="tensionChart"></canvas>
+                </div>
+            </div>
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <nav class="flex flex-wrap justify-center gap-2 mb-6" id="act-navigation">
+                    <button data-act="1" class="nav-button active px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 1: Hook</button>
+                    <button data-act="2" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 2: Setup</button>
+                    <button data-act="3" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 3: Inciting Incident</button>
+                    <button data-act="4" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 4: Big Event</button>
+                    <button data-act="5" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 5: Falling Action</button>
+                    <button data-act="6" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 6: Climax</button>
+                    <button data-act="7" class="nav-button px-4 py-2 text-sm font-semibold text-gray-700 bg-gray-200 rounded-full hover:bg-gray-300 transition-colors">Act 7: Resolution</button>
+                </nav>
+                <div id="content-container">
+                    <div id="act-1" class="act-content active">
+                        <h3 class="text-2xl font-semibold mb-3">Act 1: The Hook</h3>
+                        <p class="text-gray-700 leading-relaxed">This is where you make your first impression. The Hook is the attention-grabbing opening of your story that sets the tone and plants the seeds of the central theme or mystery. The goal is to immediately engage the audience and compel them to keep reading or watching. Techniques like starting in media res (in the middle of the action), using a shocking statement, or posing an intriguing question can all be effective hooks.</p>
+                    </div>
+                    <div id="act-2" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 2: The Setup</h3>
+                        <p class="text-gray-700 leading-relaxed">The Setup establishes the protagonist's normal world before it's changed forever. During this act, you introduce the main characters, their relationships, and the rules of the world they inhabit. The purpose is to help the audience connect with the characters and understand what's at stake if the status quo is disrupted. This is a critical step for building emotional investment.</p>
+                    </div>
+                    <div id="act-3" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 3: The Inciting Incident</h3>
+                        <p class="text-gray-700 leading-relaxed">The Inciting Incident is the moment that shatters the protagonist's ordinary world and launches the main conflict. This is a disruptive event that forces the protagonist to make a choice, committing them to the journey ahead. This act also serves as a good place to introduce subplots that will add richness and depth to the narrative. The best inciting incidents feel both unexpected and inevitable.</p>
+                    </div>
+                    <div id="act-4" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 4: The Big Event</h3>
+                        <p class="text-gray-700 leading-relaxed">In the Big Event, the protagonist actively engages with the central conflict, and the stakes rise dramatically. The antagonistic forces become clearer and more formidable, and the protagonist often experiences early setbacks that test their resolve. This act is all about building tension and deepening the audience's emotional investment by showing the true scale of the challenge.</p>
+                    </div>
+                    <div id="act-5" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 5: Falling Action & Second Turning Point</h3>
+                        <p class="text-gray-700 leading-relaxed">This is often the most emotional part of the journey. The protagonist may experience a false victory or defeat, leading them to their lowest point, or "darkest moment." This is where they are forced to confront their internal flaws and external obstacles. A second turning point then occurs, where the protagonist gains a critical realization or finds a new path forward, demonstrating their growth. The purpose of this act is to create maximum emotional investment before the final confrontation.</p>
+                    </div>
+                    <div id="act-6" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 6: The Climax</h3>
+                        <p class="text-gray-700 leading-relaxed">The Climax is the highest point of tension and the final, decisive confrontation with the main conflict. All the story's elements—character growth, plot, and theme—converge in a single, powerful sequence. The climax should resolve the central conflict and provide an emotional payoff for everything that came before. An optional denouement or anticlimax can follow, showing the immediate aftermath of the confrontation.</p>
+                    </div>
+                    <div id="act-7" class="act-content">
+                        <h3 class="text-2xl font-semibold mb-3">Act 7: The Resolution</h3>
+                        <p class="text-gray-700 leading-relaxed">The final act provides closure for the audience. The Resolution ties up any remaining loose ends, shows how the world and characters have been transformed by the journey, and reinforces the central theme. This is where you demonstrate the "new normal" and leave the audience with a sense of completion and satisfaction.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const navContainer = document.getElementById('act-navigation');
+            const contentContainer = document.getElementById('content-container');
+            const acts = contentContainer.querySelectorAll('.act-content');
+            const navButtons = navContainer.querySelectorAll('.nav-button');
+            const tensionData = [1, 2, 4, 8, 6, 10, 3];
+            const actLabels = ['Hook', 'Setup', 'Inciting Incident', 'Big Event', 'Falling Action', 'Climax', 'Resolution'];
+            const ctx = document.getElementById('tensionChart').getContext('2d');
+            const tensionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: actLabels,
+                    datasets: [{
+                        label: 'Story Tension',
+                        data: tensionData,
+                        borderColor: '#4A5568',
+                        backgroundColor: 'rgba(74, 85, 104, 0.1)',
+                        fill: true,
+                        tension: 0.4,
+                        pointBackgroundColor: '#FFFFFF',
+                        pointBorderColor: '#4A5568',
+                        pointHoverBackgroundColor: '#4A5568',
+                        pointHoverBorderColor: '#FFFFFF',
+                        pointRadius: 5,
+                        pointHoverRadius: 7
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            title: {
+                                display: true,
+                                text: 'Tension Level'
+                            }
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            display: false
+                        },
+                        tooltip: {
+                            enabled: true
+                        }
+                    }
+                }
+            });
+            function showAct(actNumber) {
+                acts.forEach(act => {
+                    act.classList.remove('active');
+                });
+                document.getElementById(`act-${actNumber}`).classList.add('active');
+                navButtons.forEach(button => {
+                    button.classList.remove('active');
+                });
+                navContainer.querySelector(`[data-act="${actNumber}"]`).classList.add('active');
+                updateChartHighlight(actNumber - 1);
+            }
+            function updateChartHighlight(actIndex) {
+                tensionChart.data.datasets[0].pointBackgroundColor = tensionData.map((_, index) => index === actIndex ? '#4A5568' : '#FFFFFF');
+                tensionChart.update();
+            }
+            navContainer.addEventListener('click', function (e) {
+                if (e.target.matches('.nav-button')) {
+                    const actNumber = e.target.dataset.act;
+                    showAct(actNumber);
+                }
+            });
+            showAct(1);
+        });
+    </script>
+</body>
+</html>
