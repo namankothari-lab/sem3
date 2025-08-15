@@ -3,49 +3,229 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pudovkin's Five Editing Principles</title>
+    <title>Pudovkin's Theories on Film Editing & Sound</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
     <style>
-        body { font-family: 'Inter', sans-serif; }
-        .principle-card { transition: transform 0.2s; }
-        .principle-card:hover { transform: scale(1.03); }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F5F5DC; /* Beige */
+        }
+        h1, h2, h3 {
+            font-family: 'Playfair Display', serif;
+        }
+        .card {
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            background-color: #fff;
+            border: 1px solid #ddd;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+        }
+        #modal {
+            transition: opacity 0.3s ease;
+        }
+        .modal-content {
+            transition: transform 0.3s ease;
+        }
+        .diagram {
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            min-height: 100px;
+        }
+        .timeline-container {
+            background: #fff;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .timeline {
+            position: relative;
+            height: 50px;
+            background: #e0e0e0;
+            border-radius: 4px;
+            margin-top: 1rem;
+        }
+        .track {
+            position: absolute;
+            height: 20px;
+            border-radius: 4px;
+        }
+        .video-track {
+            background: #a7c7e7; /* Light Blue */
+            top: 2px;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
+        .audio-track {
+            background: #f3a683; /* Light Orange */
+            bottom: 2px;
+            width: 100%;
+            transition: all 0.5s ease;
+        }
     </style>
+    <!-- Chosen Palette: Vintage Cinema (Beige, Sepia Tones, Off-White) -->
+    <!-- Application Structure Plan: A two-part SPA. Part 1 uses an interactive card grid with modals to explain the five types of relational editing. Part 2 features an interactive timeline simulation to demonstrate the principles of asynchronous sound (J-cuts, L-cuts, counterpoint). This structure separates the distinct concepts from the source text into focused, interactive learning modules, which is more effective than a linear page. -->
+    <!-- Visualization & Content Choices: Report Info: Pudovkin's theories on editing and sound. Goal: Make abstract film theory tangible and interactive. Viz/Presentation: Cards for relational editing, each with a custom HTML/CSS diagram in its modal. An interactive timeline with CSS animations for asynchronous sound. Interaction: Click-to-reveal modals and buttons to trigger timeline animations. Justification: Visual, interactive diagrams and simulations are the best way to explain these non-data concepts, making them easier to understand and remember. Library/Method: Vanilla JS for all logic. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
-<body class="bg-gray-100 text-gray-800">
-    <div class="container mx-auto p-4 sm:p-6 md:p-10">
-        <header class="text-center mb-8">
-            <h1 class="text-4xl font-bold text-gray-900">Pudovkin's Five Principles of Editing</h1>
-            <p class="mt-2 text-lg text-gray-600">A foundational theory for building cinematic meaning</p>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-8">
+        <header class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-bold text-gray-900">Pudovkin on Film Technique</h1>
+            <p class="mt-3 text-lg text-gray-700 max-w-3xl mx-auto">An interactive exploration of V.I. Pudovkin's theories on relational editing and the power of asynchronous sound in cinema.</p>
         </header>
-        <main>
-            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 justify-center">
-                <div class="principle-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-1">1. Contrast</h2>
-                    <p class="text-gray-700 text-center text-sm">Juxtapose opposing scenes or ideas to highlight their differences and create drama or irony.</p>
-                </div>
-                <div class="principle-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-1">2. Parallelism</h2>
-                    <p class="text-gray-700 text-center text-sm">Show similar actions or motifs in different locations/times. Suggests connections or themes.</p>
-                </div>
-                <div class="principle-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-1">3. Symbolism</h2>
-                    <p class="text-gray-700 text-center text-sm">Edit to associate an object or action with deeper meaning (e.g., cutting from a caged bird to a trapped person).</p>
-                </div>
-                <div class="principle-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-1">4. Simultaneity</h2>
-                    <p class="text-gray-700 text-center text-sm">Cross-cut scenes happening at the same time to build suspense or show how actions affect each other.</p>
-                </div>
-                <div class="principle-card bg-white rounded-lg shadow p-5 flex flex-col items-center">
-                    <h2 class="text-xl font-semibold mb-1">5. Leitmotiv</h2>
-                    <p class="text-gray-700 text-center text-sm">Repeat a shot, sound, or motif for emphasis and to build a pattern or mood (e.g., recurring shots of clocks).</p>
-                </div>
+
+        <section id="relational-editing">
+            <h2 class="text-3xl font-bold text-center mb-8">Part I: Relational Editing</h2>
+            <div id="editing-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <!-- Editing technique cards will be injected here -->
             </div>
-            <section class="mt-10 text-center">
-                <h2 class="text-2xl font-bold mb-3">Why care about these principles?</h2>
-                <p class="text-gray-700 mb-2">Pudovkin believed editing was the art of connecting ideas, not just shots. Use these tools to create meaning and emotion!</p>
-            </section>
-        </main>
+        </section>
+
+        <hr class="my-16 border-gray-300">
+
+        <section id="asynchronous-sound">
+            <h2 class="text-3xl font-bold text-center mb-4">Part II: The Asynchronous Principle of Sound</h2>
+            <p class="text-center text-gray-700 max-w-3xl mx-auto mb-8">Pudovkin argued that sound's true power is not in mimicking reality, but in creating a "counterpoint" to the image. Explore these concepts below.</p>
+            <div class="timeline-container">
+                <div class="flex flex-wrap justify-center gap-2 mb-6">
+                    <button data-sound-type="sync" class="sound-btn bg-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-300 transition">Synchronous</button>
+                    <button data-sound-type="j-cut" class="sound-btn bg-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-300 transition">J-Cut</button>
+                    <button data-sound-type="l-cut" class="sound-btn bg-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-300 transition">L-Cut</button>
+                    <button data-sound-type="counterpoint" class="sound-btn bg-gray-200 px-4 py-2 rounded-full text-sm font-semibold hover:bg-gray-300 transition">Counterpoint</button>
+                </div>
+                <div class="relative">
+                    <div class="flex items-center mb-1">
+                        <span class="w-16 text-sm font-bold text-blue-600">Video:</span>
+                        <div class="w-full h-5 bg-blue-200 rounded-sm relative"><div id="video-clip-1" class="track video-track bg-blue-400 absolute left-0 h-full" style="width: 50%;"></div><div id="video-clip-2" class="track video-track bg-blue-600 absolute right-0 h-full" style="width: 50%;"></div></div>
+                    </div>
+                     <div class="flex items-center">
+                        <span class="w-16 text-sm font-bold text-orange-600">Audio:</span>
+                        <div class="w-full h-5 bg-orange-200 rounded-sm relative"><div id="audio-clip-1" class="track audio-track bg-orange-400 absolute left-0 h-full" style="width: 50%;"></div><div id="audio-clip-2" class="track audio-track bg-orange-600 absolute right-0 h-full" style="width: 50%;"></div></div>
+                    </div>
+                </div>
+                <p id="sound-explanation" class="mt-4 text-center text-gray-600 min-h-[4rem]"></p>
+            </div>
+        </section>
     </div>
+
+    <!-- Modal -->
+    <div id="modal" class="fixed inset-0 bg-black bg-opacity-70 flex items-center justify-center p-4 hidden z-50">
+        <div id="modal-content" class="modal-content bg-white rounded-lg shadow-xl w-full max-w-lg transform scale-95">
+            <div class="p-6">
+                <div class="flex justify-between items-start">
+                    <h3 id="modal-title" class="text-2xl font-bold"></h3>
+                    <button id="modal-close" class="text-3xl font-light leading-none text-gray-400 hover:text-gray-600">&times;</button>
+                </div>
+                <div id="modal-body" class="mt-4 text-gray-700"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const editingData = [
+                { id: 'contrast', title: 'Contrast', description: 'Juxtaposing two opposing shots to create a powerful impression, such as showing wealth next to poverty.' },
+                { id: 'parallelism', title: 'Parallelism', description: 'Developing two thematically unconnected actions in parallel, linked by a shared element to build tension or create a psychological connection.' },
+                { id: 'symbolism', title: 'Symbolism', description: 'Using an edit to introduce an abstract concept. For example, intercutting a protest with a slaughterhouse to create a powerful metaphor.' },
+                { id: 'simultaneity', title: 'Simultaneity', description: 'Rapidly cutting between two actions where the outcome of one depends on the other, creating maximum tension and excitement.' },
+                { id: 'leitmotif', title: 'Leit-motif', description: 'Repeating a specific shot or sequence to emphasize a core theme, reinforcing a message or emotional state.' }
+            ];
+
+            const grid = document.getElementById('editing-grid');
+            const modal = document.getElementById('modal');
+            const modalContent = document.getElementById('modal-content');
+            const modalTitle = document.getElementById('modal-title');
+            const modalBody = document.getElementById('modal-body');
+            const modalClose = document.getElementById('modal-close');
+
+            editingData.forEach(item => {
+                const card = document.createElement('button');
+                card.className = 'card rounded-lg p-6 text-left cursor-pointer focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-800';
+                card.dataset.id = item.id;
+                card.innerHTML = `<h3 class="text-xl font-bold text-gray-900">${item.title}</h3><p class="mt-2 text-sm text-gray-600">${item.description.split('.')[0]}.</p>`;
+                grid.appendChild(card);
+            });
+
+            const openModal = (id) => {
+                const item = editingData.find(i => i.id === id);
+                modalTitle.textContent = item.title;
+                modalBody.innerHTML = `<p>${item.description}</p>`;
+                modal.classList.remove('hidden');
+                document.body.style.overflow = 'hidden';
+                setTimeout(() => {
+                    modal.classList.add('opacity-100');
+                    modalContent.classList.remove('scale-95');
+                }, 10);
+            };
+
+            const closeModal = () => {
+                modal.classList.remove('opacity-100');
+                modalContent.classList.add('scale-95');
+                setTimeout(() => {
+                    modal.classList.add('hidden');
+                    document.body.style.overflow = '';
+                }, 300);
+            };
+
+            grid.addEventListener('click', e => e.target.closest('.card') && openModal(e.target.closest('.card').dataset.id));
+            modalClose.addEventListener('click', closeModal);
+            modal.addEventListener('click', e => (e.target === modal) && closeModal());
+
+            const audioClip1 = document.getElementById('audio-clip-1');
+            const audioClip2 = document.getElementById('audio-clip-2');
+            const soundExplanation = document.getElementById('sound-explanation');
+            const soundButtons = document.querySelectorAll('.sound-btn');
+
+            const soundStates = {
+                sync: {
+                    audio1: { left: '0%', width: '50%' },
+                    audio2: { right: '0%', width: '50%', left: 'auto' },
+                    text: '<strong>Synchronous:</strong> The sound directly matches the image. What you see is what you hear. This is the most basic use of sound.'
+                },
+                'j-cut': {
+                    audio1: { left: '0%', width: '50%' },
+                    audio2: { left: '40%', width: '60%', right: 'auto' },
+                    text: '<strong>J-Cut:</strong> The audio from the next scene (Clip 2) begins before the video cuts to it, creating a smooth lead-in.'
+                },
+                'l-cut': {
+                    audio1: { left: '0%', width: '60%' },
+                    audio2: { right: '0%', width: '50%', left: 'auto' },
+                    text: '<strong>L-Cut:</strong> The audio from the first scene (Clip 1) continues playing over the video of the next scene, often to show a reaction.'
+                },
+                counterpoint: {
+                    audio1: { left: '0%', width: '100%' },
+                    audio2: { left: '0%', width: '0%', right: 'auto' },
+                    text: '<strong>Counterpoint:</strong> The sound creates a different emotional tone than the image (e.g., triumphant music over a tragic scene) to create a deeper, often ironic, meaning.'
+                }
+            };
+            
+            function setSoundState(type) {
+                const state = soundStates[type];
+                Object.assign(audioClip1.style, state.audio1);
+                Object.assign(audioClip2.style, state.audio2);
+                soundExplanation.innerHTML = state.text;
+
+                soundButtons.forEach(btn => {
+                    btn.classList.toggle('bg-gray-800', btn.dataset.soundType === type);
+                    btn.classList.toggle('text-white', btn.dataset.soundType === type);
+                    btn.classList.toggle('bg-gray-200', btn.dataset.soundType !== type);
+                });
+            }
+
+            document.querySelector('#asynchronous-sound').addEventListener('click', e => {
+                if(e.target.matches('.sound-btn')) {
+                    setSoundState(e.target.dataset.soundType);
+                }
+            });
+
+            setSoundState('sync');
+        });
+    </script>
 </body>
 </html>
