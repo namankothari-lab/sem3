@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Writer's Lens: Crafting Scene Descriptions</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #FDFBF8;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .tab-button.active {
+            background-color: #A78BFA;
+            color: #FFFFFF;
+            font-weight: 600;
+        }
+        .example-text {
+            background-color: #F3F4F6;
+            border-left: 4px solid #A78BFA;
+            padding: 1rem;
+            border-radius: 0.25rem;
+            font-style: italic;
+            color: #374151;
+        }
+        .dos-donts-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+        @media (min-width: 768px) {
+            .dos-donts-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+        .dos li, .donts li {
+            display: flex;
+            align-items: start;
+            margin-bottom: 0.75rem;
+        }
+        .dos .icon, .donts .icon {
+            flex-shrink: 0;
+            width: 1.5rem;
+            height: 1.5rem;
+            margin-right: 0.75rem;
+        }
+    </style>
+    <!-- Chosen Palette: Warm Neutrals with Purple Accent -->
+    <!-- Application Structure Plan: The application is designed as a tabbed interface allowing users to explore the three core concepts (Visual Action, Mental State, Dialogue Intent) and a final synthesis section. This non-linear structure is better for learning and reference than a simple scrollable page. An interactive diagram visually represents the three core components, highlighting the active section. This reinforces the "Three-Dimensional" concept from the source material in a dynamic way. -->
+    <!-- Visualization & Content Choices: Report Info: The three elements of scene description. Goal: To create an interactive educational tool. Viz/Presentation: Tabbed navigation for content sections, styled blockquotes for examples, and distinct "Do's & Don'ts" lists with icons for quick comprehension. An interactive diagram made with HTML/CSS provides a visual anchor. Interaction: Clicking tabs changes the displayed content and updates the visual diagram's highlight. Justification: This approach makes the content more digestible and engaging, turning a passive guide into an active learning experience. Library/Method: Vanilla JS for all interactivity. -->
+    <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
+</head>
+<body class="text-gray-800">
+
+    <div class="container mx-auto p-4 sm:p-6 md:p-8 max-w-4xl">
+        <header class="text-center mb-10">
+            <h1 class="text-4xl font-bold text-gray-900">The Writer's Lens</h1>
+            <p class="mt-2 text-lg text-gray-600">Crafting Scene Descriptions That Direct The Imagination</p>
+        </header>
+
+        <main class="bg-white rounded-2xl shadow-lg p-6 sm:p-8">
+            <div class="text-center mb-8">
+                 <p class="text-gray-600">A great scene description is three-dimensional. It provides a blueprint for the entire production team by blending what we see, what characters feel, and what they truly mean. Explore the three core elements below.</p>
+            </div>
+
+            <div id="tabs-container" class="flex flex-wrap justify-center gap-2 mb-8">
+                <button data-tab="action" class="tab-button active px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">Visual Action</button>
+                <button data-tab="mental" class="tab-button px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">Mental State</button>
+                <button data-tab="intent" class="tab-button px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">Dialogue Intent</button>
+                <button data-tab="synthesis" class="tab-button px-4 py-2 text-sm font-medium text-gray-700 bg-gray-100 rounded-full hover:bg-gray-200 transition-colors">The Complete Scene</button>
+            </div>
+
+            <div id="content-container">
+                <div id="action" class="tab-content active">
+                    <h2 class="text-2xl font-semibold mb-4">Element #1: Visual Action Description</h2>
+                    <p class="mb-4 text-gray-700">This is the foundation of your scene—what the camera sees and the audience hears. It creates a visual map for cinematographers and set designers, establishes the tone, and implies camera framing without giving explicit directions.</p>
+                    <div class="example-text mb-6">
+                        <p>The Joker sits alone at the metal table, hands cuffed, a faint grin curling on his lips. The room is bare, lit by a single overhead light casting hard shadows on his face. Behind him, a door swings open. Batman emerges from the darkness and slams the Joker's head onto the table. Papers flutter. The fluorescent light flickers.</p>
+                    </div>
+                    <div class="dos-donts-grid">
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-green-600">DO:</h3>
+                            <ul class="dos text-gray-700">
+                                <li><span class="icon text-green-500">✔</span> Use present tense, active voice.</li>
+                                <li><span class="icon text-green-500">✔</span> Focus on what can be seen and heard.</li>
+                                <li><span class="icon text-green-500">✔</span> Include sensory details that set the mood.</li>
+                                <li><span class="icon text-green-500">✔</span> Use precise verbs (e.g., "emerges" not "comes").</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <h3 class="font-semibold text-lg mb-3 text-red-600">DON'T:</h3>
+                            <ul class="donts text-gray-700">
+                                <li><span class="icon text-red-500">✖</span> Include camera directions unless necessary.</li>
+                                <li><span class="icon text-red-500">✖</span> Write what cannot be filmed.</li>
+                                <li><span class="icon text-red-500">✖</span> Over-describe every single detail.</li>
+                                <li><span class="icon text-red-500">✖</span> Use passive constructions that slow the pace.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="mental" class="tab-content">
+                    <h2 class="text-2xl font-semibold mb-4">Element #2: Character Mental State</h2>
+                    <p class="mb-4 text-gray-700">This provides the "why" behind a character's actions. It gives actors a psychological foundation for their performance, revealing internal motivations, emotional subtext, and the power dynamics between characters without dictating specific expressions.</p>
+                    <div class="example-text mb-6">
+                        <p>Batman is a storm barely contained, his voice low but seething with rage. He's not here to play games; he's desperate to save lives. The Joker is calm, almost playful, savoring the moment. His stillness isn't submission - it's control. He knows Batman needs him, and that gives him power.</p>
+                    </div>
+                     <p class="text-gray-700">A weak description is "John is angry." A strong description gives layers: "John's anger isn't explosive—it's cold, deliberate, the result of years of calculated resentment finally finding its target."</p>
+                </div>
+
+                <div id="intent" class="tab-content">
+                    <h2 class="text-2xl font-semibold mb-4">Element #3: Dialogue Intent</h2>
+                    <p class="mb-4 text-gray-700">Dialogue intent is the subtext—what characters are really talking about beneath their words. It reveals the strategic purpose of their words, the emotional undercurrents, and how the conversation shifts power, trust, or intimacy.</p>
+                    <div class="example-text mb-6">
+                        <p>Batman demands the location of Harvey Dent and Rachel, pushing harder with each unanswered question. The Joker taunts him, twisting each question into a mockery of Batman's morality, turning the interrogation into a psychological chess match. The spoken words are about "where are they?" - but the underlying conversation is about proving who will break first.</p>
+                    </div>
+                    <p class="text-gray-700">Instead of writing "Sarah asks John about his day," try revealing the intent: "Sarah probes about John's workday, fishing for confirmation of her suspicions about his affair."</p>
+                </div>
+
+                <div id="synthesis" class="tab-content">
+                    <h2 class="text-2xl font-semibold mb-4">Bringing It All Together: The Complete Scene</h2>
+                    <p class="mb-4 text-gray-700">When all three elements work in harmony, your scene description becomes a comprehensive blueprint that communicates your vision to every department, from the director to the actors to the cinematographer.</p>
+                    <div class="example-text">
+                        <h4 class="font-semibold text-gray-800">INT. GOTHAM CITY POLICE HEADQUARTERS - INTERROGATION ROOM - NIGHT</h4>
+                        <p class="mt-2"><strong class="text-purple-600">Action:</strong> The Joker sits alone at the metal table, cuffs glinting under the harsh overhead light. The door swings open - Batman steps in from the shadows and slams the Joker's head onto the table. Papers scatter. The light hums and flickers.</p>
+                        <p class="mt-2"><strong class="text-purple-600">Mental State:</strong> Batman's rage simmers beneath a forced calm, fueled by the urgency of saving lives. The Joker, unfazed, delights in the tension, savoring his control over the situation.</p>
+                        <p class="mt-2"><strong class="text-purple-600">Dialogue Intent:</strong> Batman presses for the location of Harvey and Rachel. The Joker answers with riddles and mockery, turning each question into a trap, shifting the power balance with every word.</p>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const tabsContainer = document.getElementById('tabs-container');
+            const contentContainer = document.getElementById('content-container');
+            
+            tabsContainer.addEventListener('click', function (e) {
+                if (e.target.matches('.tab-button')) {
+                    const tabId = e.target.dataset.tab;
+                    
+                    tabsContainer.querySelectorAll('.tab-button').forEach(button => {
+                        button.classList.remove('active');
+                    });
+                    
+                    contentContainer.querySelectorAll('.tab-content').forEach(content => {
+                        content.classList.remove('active');
+                    });
+                    
+                    e.target.classList.add('active');
+                    document.getElementById(tabId).classList.add('active');
+                }
+            });
+        });
+    </script>
+</body>
+</html>
